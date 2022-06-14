@@ -1,0 +1,133 @@
+XML
+File type that stands for Extensible Markup Language
+HML is structured very similarly to HTML
+Generally used for configuration
+is human-readable and machine readable
+
+Cloud Computing - a virtual service that gives the user computing power, storage and elastic functions
+ex.  amazon web services, azure, dropbox, google cloud platform
+
+Problems with local computing:
+1. Companies need to invest their own resources into servers, computers, etc.
+2. Costs a lot of money
+3. Risk of not enough resources or wasted money on unused resources
+4. Limited collaboration capability
+
+Cloud Computing exists to alleviate of these costs and risks
+On-demand payment and use.
+Elastic - can changes the computing power/storage/etc. as needed
+
+4 Types of Cloud Platforms
+1. Private Cloud - used by a company who doesn't want their resources to be utilized for the public
+2. Public Cloud - accessible by the public for all sorts of different functions
+3. Hybrid Cloud - a mix of both Private and Public Cloud qualities
+4. Multi-Cloud - have both public and private clouds to disperse resources more efficiently and potentially save money
+
+Different functions that a cloud is capable of offering (*aaS)
+IaaS - Infrastructure as a Service (access to the house plans and adjust them as desired)
+	Gives the user the ability to access physical and virtual servers, storage systems, re-configure things to their liking
+PaaS - Platform as a Service (have access to the house and all functions but cannot make adjustments)
+	On-demand access to cloud-hosted applications
+	can develop, run, and configure programs, store data, maintain, and manage applications
+SaaS - Software as a Service (access to a specific room of the house and all functions of that room and can rent them out individually)
+	on-demand, ready to use software
+FaaS - Function as a Service (can rent out only certain appliances of a room)
+	still new in development
+	only utilizes specific functions of an application as they are needed
+
+AWS - Amazon Web Services
+	- publicly released in 2004
+	Functions:
+		1. Short-term and long-term data storage
+		2. Elastic computing resources
+		3. Data management systems
+		4. Allows for Big Data analysis
+		5. Adaptible to company needs
+	- has over 200 different services
+		S3 - storage
+		EC2 - elastic computing
+		DBS - cloud databases
+		EMR - elastic mapreduce
+
+AWS Structure
+Divided into regions
+	- Cluster of data centers in a specific area of the world
+	ex. us-east-2
+	Reason to selecting a region bases on a few criteria
+	1. Pricing
+	2. Local and company law
+	3. Services they provide
+	4. Proximity
+	Regions are divided Availability Zones
+	- one or more data centers that contain redundant information
+	- redundancy creates fault tolerance
+	- 2-6 availability zones per region
+	Edge Locations
+	- data center or point of presense
+	- over 300 of them worldwide
+	- 84 availability zones across 42 countries
+	- Data center locations are often remote
+
+Amazon S3 - Simple Storage Service
+-a Cloud storage tool
+- has very strong data durability (99.999999% protection against any harm to your data)
+- offers multiple different types of storage depending on access and price
+- stores "object" in "buckets" (like files in a directory)
+	- a bucket must have a unique name 
+		- 3-63 characters, no underscores, capital letters
+		ex. my-bucket5
+			s3://my-bucket5/my-object
+			23://my-bucket5/Subdirectory/my-object
+Replication:
+Root user can configure data replication options
+1. Cross Region Replicaiton
+2. Single Region Replication
+
+S3 Storage Options:
+- S3 Standard
+- S3 Standard Infrequent Access
+	minimum amount of time for storage (good for short projects)
+	cheaper than standard storage
+- S3 One-Zone IA
+	can only be accessed from one availability zone
+	cheaper than Standard Infrequent Access
+- S3 Glacier
+	Very long-term storage (90 days)
+	cheaper than Standard IA
+	takes more time to retrieve info (up to 12 hours)
+- S3 Glacier Deep Archive
+	Very long-term storage (180 days)
+	Cheaper than Glacier
+	Takes a significant amount of time to retrieve data (2-3 days max)
+
+Encryption - a means of keeping data away from people who might have unauthorized access
+- works off a cipher to scramble text
+	ex. ABC -> DEF
+-the cipher is determined by the encryption key
+-Two Types of Encryption
+	1. Server-Side Encryption
+		-AWS encrypts the data and manages the keys
+	2. Client-Side Encryption
+		- the Client manually encrypts the data and keeps the key before sending info to the cloud
+
+EC2 - Elastic Cloud Compute - provides adapatible, and resizable computing power
+	based on what are called "instances"
+		upload a program to an EC2 instance, and the instance will run until you ask it to stop
+EC2 Consists of 
+	1. Virtual Machine
+	2. Storage Data
+	3. Auto-Scaling
+-pricing:
+	Spot Instance - send a request for computing power, price, and availability zone
+	- the request is fullfilled by Amazon when the space becomes available
+	Reserved Instance - pay a little more to reserve computing capacity over a period of time
+	- must pay the capacity for as long as it is reserved
+	- can last up to 3 years
+	Dedicated Host - a physical server that contains EC2 instance capacity completely under your control
+	- make sure to address compliance with company/local policy
+	-saves money on licensing costs
+	On-Demand Instance
+	- EC2 is run on a private cloud for a single customer
+	- physically isolated to keep it safe from outsiders
+
+EMR - Elastic Map Reduce

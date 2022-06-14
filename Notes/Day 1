@@ -1,0 +1,39 @@
+Big data Fundamentals
+
+Big data is a lot of data.
+Traditional systems are not capable of handling such amounts of data
+
+Big Data's 5 V's
+Volume - a lot
+Variety - different formats, different sizes, different qualities
+Value - how valuable is the information of data
+Velocity - handling a lot of data frequently
+Veracity - Reliability and value of data
+ex:
+Youtube clickstream information
+Netflix recommends shows that are succeeding over those that are failing
+
+Types of Data
+Structured Data - defined format and size
+ex:
+you can use the patterns of the data in order to analyze efficently
+Social Security ###-##-####
+
+Semi-Structured Data - defined structure, but variable sizes
+ex:
+text files
+
+Quasi-Structured Data - no defined format but you can manipulate it into a usable format
+ex:
+Clickstream data
+
+Unstructured Data - Data without structure, format, or size definition
+Roughly 85% of all data that exists
+Ex:
+Word Document, PDF, video files
+
+How to handle all of this data?
+1. Relational Databases RDBMS
+Organize data int oa structure to make it useful for analysis
+This class uses MySQL
+Good for structured data

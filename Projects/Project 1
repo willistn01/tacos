@@ -1,0 +1,22 @@
+import mysql.connector
+import names
+import maskpass
+import random
+
+# passwd1 = maskpass.askpass(prompt="What is your MySQL password: ", mask="*")
+
+# db= mysql.connector.connect(user= "root", host= "localhost", port= 3306, passwd= passwd1, database= "Training")
+
+# cursorObject = db.cursor()
+# # cursorObject.execute("CREATE TABLE Clients (Account_Number  int Primary Key AUTO_INCREMENT NOT NULL, Name VARCHAR(100) NOT NULL, Age smallint UNSIGNED NOT NULL, Gender ENUM('Male', 'Female', 'Other') NOT NULL)")
+# cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s" ())
+
+# for i in range(50):
+#     print(names.get_full_name())
+a = random.randrange(50)
+for i in range(50):
+    print(a)
+
+# cursorObject.execute("DESCRIBE Clients")
+# for x in cursorObject:
+#     print(x)

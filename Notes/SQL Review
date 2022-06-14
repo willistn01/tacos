@@ -1,0 +1,115 @@
+SQL Review
+Create - used to create a table or a database
+	create database 'database name'
+	create table 'table name' (column1 datatype1, column2 datatype2,..., columnN datatypeN)
+Use - selecting which database you're using
+Alter Table - allows you to edit the table
+	alter table 'table name' add (column datatype)
+	alter table 'table name' drop column
+Drop Table - gets rid of the table or a column in the table
+	drop table 'table name'
+Drop Database - gets rid of a database
+	drop database 'database name'
+Truncate - deletes the data from the table but not the table itself
+	truncate 'table name'
+Select - query information from a table
+From - choose the table that you query from
+	select (column(s)) from 'table name'
+Where - creates a query condition to select only certain records
+	select (column(s)) from 'table name' where column (condition)
+		ex select * from Mytable where population > 4000
+Order By - sort the results in a specific order
+	select * from Mytable order by column asc/desc
+Group By - used to create aggregates and group by certain column(s)
+	- when you want to analyze all members of a certain group
+	select * count(ID) from Employee where HireDate > 2020:10:10 group by Department;
+Having - allows you to further scrutinize a Group By
+	- different from Where in that it creates a condition on the groups, allows you to specify searches based on aggregates
+	select count(ID), Department from Employee group by Department having Sum(Pay) > 30000
+
+Aggregates vs Scalars
+Aggregate - combines records to create some conclusion
+	- or multiple records to get one result
+Scalar - performs a function on an individual record
+	- one record in, one record out
+Min() (aggregate) - shows minimum value from a group of values
+Round () (scalar) - rounds a value to the nearest decimal point
+Count() (aggregate) - counts all related data values based on the selected column
+Len() (scalar) - returns the number of characters (ie the length) of a string
+Sum() (aggregate) - adds the data selected
+Now (scalar) - grabs the current date and time
+Ucase/Lcase () (scalar) - puts the data in upper/lower case (assuming the data is varchar)
+First () (aggregate) - grabs the first value out of the data selected
+Avg() (aggregate) - computes the average of the data selected
+
+Join - allows  you to combine columns from two (or more) different tables
+Inner Join - takes the records from both tables that are matching 
+	- only combines the information that is the same in both tables
+Full Outer Join - puts all records from both tables together (everything)
+Self Join - compares multiple columns from the same table
+Left/Right Join - grabs records from both tables that match and all records from the Left/Right table
+Cross Join - combines every record from one column to every record in another column
+	ex. Two Columns:
+		ID	Name
+		1	Jacob
+		2	Rose
+		3	Drew
+	the output of a Cross Join is the number of records multiplied together
+		1	Jacob
+		1	Rose
+		1	Drew
+		2	Rose
+		2	Drew
+		2	Jacob
+		3	Drew
+		3	Jacob
+		3	Rose
+Join statement:
+select ... from table1 join table2 on table1.col = table2.col
+
+Set Operations:
+Union  - combines rows from multiple tables to create new columns
+	- the two selects need to return the same number of columns
+	- will not return duplicates
+	- most useful when multiple tables contain similar information, but are seperated
+		ex. two employee tables, one for recent hires, one for longtime employees
+			similar information in both tables, but separated on some criteria
+Instead of Intersect it would be In
+	- Intersect will grab records that exist only in both tables
+	select * from table where 'Column name' in (select ...)
+Instead of Except it would be Not In
+	- Except will grab records that are in the first that are not in the second
+	select * from table where 'column name' not in (select ...)
+
+Constraints - limiting conditions on the data that goes into a field
+	- used in the "create table statement"
+Primary Key - defines a column within tables that contains only unique values
+	- value must be Not Null
+	create table 'table name'(
+		col1 datatype,
+		col2 datatype,
+		primary key(col1));
+Foreign Key - a key column that references the primary key of another table
+	create table 'table name'(
+		col1 datatype,
+		col2 datatype,
+		foreign key (col1) references 'table name'('column name'));
+Not Null - value cannot be Null when inserting data
+Unique - ensures values in a column are different
+Default Null - value in this column will be null unless otherwise specified
+Check - specifies a column's value requirements
+	create table 'table name'(
+		age int,
+		col2 datatype,
+		check (age >= 18));
+
+ERD - entity relation diagram EERD - enhanced entity relation diagram
+	- creates a visual representation of the table relationships
+
+ACID Properties - essential properties for any RDBMS to function efficiently/effectively
+Atomicity (A) - either every part of a transaction occurs or the entire thing is abandoned
+	- no half-way done transactions
+Consistency (C) - data must be consistent across all tables in the database
+	- any reference to a key of piece of data must be the same
+Isolation (I) - ensures that one transaction cannot impact or influence another occuring transaction
+Durability (D) - ensures that in the case of malfunctions or system failures, any committed transaction is protected

@@ -1,0 +1,16 @@
+import names
+import random
+#  for i in range(10):
+#     print(names.get_full_name())
+
+# for i in range(10):
+#     rand_name = names.get_full_name(gender='male')
+#     print(rand_name)
+
+# for i in range(50):
+#     land_name = names.get_full_name(gender='female')
+#     print(land_name)    
+
+for i in range(50):
+    a = random.randrange(100)
+    print(a)

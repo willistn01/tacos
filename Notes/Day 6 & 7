@@ -1,0 +1,218 @@
+Relational Database Management System
+Database - a collection of data with a certain organization
+RDBMS (Relational) - regards the relationships between sets of data
+ex. you're working at a school with two different data bases, 1. with all the names of the students and 2. with all of their test grades, and then be able to make a connector
+link the 2 seperate databases together
+Relational DBs usually organize their data into tables
+Tables contain row (records) of data divided into columns
+
+Entity Relation Diagram (ERD) - a visual representation of the relationships between tables
+
+Database allows  you to organize and structure your data.
+Use a predefined schema to insert the data properly
+
+SQL - Structured Query Language
+- Our means of interacting with databases
+- Made a standard language by the American National Standards Institute in 1986
+Other types of query languages such a postgres, SQL, MS Access, Oracle, etc.
+
+SQL allows users to:
+1. Access data in RDBMS
+2. describe/define the data
+3. Manipulate the data or create relationships
+4. Embed into other languages
+
+SQL is divided into 5 sublanguages (capabilities or powers)
+1. DDL - Data Definition Language
+- CREATE, ALTER, UPDATE, DROP
+2. DML - Data Manipulation Language
+-INSERT, UPDATE, DELETE
+3. DCL - Data Control Language
+- GRANT, REVOKE
+4. DQL - Data Query Language
+- SELECT
+TCL - Transactional Control Language
+-COMMIT, ROLLBACK, SET TRANSACTION
+
+Key words in SQL
+USE db_name;
+CREATE TABLE table_name (col1 datatype1, col2 datatype2, ...);
+DROP table_name;
+TRUNCATE table_name; - leaves the table structure intact as opposed to drop
+INSERT INTO table_name (col1, col2, ...) VALUE (data)
+UPDATE table_name (WHERE condition)
+WHERE - creates a condition for the queried data to satisfy (<, >, LIKE (pattern matching), etc.)
+SELECT - how you access information
+ex SELECT (column names) FROM table_name (* if you're taking all columns)
+GROUP BY - a means of organizing the information being queried based on 1 or more columns
+	HAVING - a way to further scruntinze the GROUP BY
+	Aggregates : combining data together to analyze its grouping in some way
+		SUM, MAX, MIN, LAST, FIRST
+		Only possible with GROUP BY clauses
+	Scalers : Changing each individual value
+		LCASE, UCASE, LEN (length, number of characters), ROUND, CIEL (rounds up regardless of decimal value), FLOOR (rounds down regardless of decimal value)
+ORDER BY - only changes the view of the output based on some designated order
+	Default ASC (ascending), can also be DESC (descending)
+
+Order of Operations:
+A statement written links:
+	SELECT * FROM table_name WHERE condition GROUP BY column HAVING condition ORDER BY column
+Will execute in the following order:	
+	1. FROM
+	2. WHERE (create your condition)
+	3. GROUP BY/ HAVING
+	4. ORDER BY
+	5. SELECT
+
+LIKE - used in a WHERE clause for pattern matching
+	... WHERE col LIKE ...
+Arguments can be passed into LIKE to search for many different patterns
+ex. LIKE 'A%' - searches for every item that starts with 'A', 'a' is ignored
+	% indicates any number of characters
+LIKE '%A' - searches for every item that ends with 'A'
+LIKE 'a%p' - starts with 'a' ends with 'p'
+LIKE '_a%' - second letter is 'a'
+LIKE '_^n' - Any item with exactly _^n characters
+
+JOINS - a way to perform analysis on multiple tables at a time
+Takes columns from two (or more) different tables
+	Allows you to make difficult queries
+Tables need to have at least 1 column that are the same values
+ex. SELECT... FROM table_name1 JOIN table_name2 ON table_name1.col = table_name2.col
+default JOIN is INNER JOIN
+Types of JOINS:
+	INNER JOIN - return all records that match in both tables
+	RIGHT/LEFT OUTER JOINS - return all records that match and all records from the RIGHT/LEFT table
+	FULL OUTER JOIN - return all records in both tables if there is a match in either left or right
+	SELF JOIN - when  you want to analyze multiple columns from the same table to each other
+
+AS - Alias
+Use AS when  you want to rename a column in your output
+Also use it in a query to make writing the query much less cumbersome
+AS when you create a table, this will save the output of a query as a new table
+ex create table table_name as (select)
+
+Set Operations (Union, Intersect, Except):
+Union: (SELECT ...) UNION (SELECT ...)
+Intersect: (SELECT ...) Intersect (SELECT ...)
+	NOT a keyword in MySQL
+Except (NOT IN in MySQL)
+	SELECT from Students NOT IN 1 and 2
+	
+Constraints
+Distinct - selecting unique rows, no duplicates
+	Select distinct ...
+creating a table with constraints:
+	create table (student_id int, name varchar(255), GPA float primary key(student_id));
+Primary Key is a unique indentifier for a record
+	Auto increment - automatically gives new data in a column that is numerical
+Foreign Key refers to a Primary Key in another table
+	create table (student_id int, name varchar(255), GPA float, Foreign Key (student_id) references table_name(column));
+	-this ensures that the data is consistent across the database
+Unique - set this constraint on a column when creating a table, prevent data from being added that is not unique to the table
+	create table (student_id int unique, name varchar(255), GPA float, foreign key (student_id) references table_name(column));
+Not - sets a restriction on what values can be in the data
+	 create table (student_id int, name varchar(255), GPA float not NULL, foreign key (student_id) references table_name(column));
+Check - sets a restrictive check on data inserted into the table
+	create table (student_id int, name varchar(255), GPA float, check (0 <= GPA <= 4);
+
+Cardinality vs Multiplicity
+Cadinality refers to the number a different data types in the table(s)
+	High cardinality - there are a lot of different values with little repetition
+		ex. a bank tracking members where they only want their name to appear once
+	Low Cardinality - there are a limited variety of values with a lot of repetition
+		ex. a person having multiple bank accounts
+Multiplicity is related to the data in multiple tables and how they relate to each other
+	1:1 two tables are associated with each ither based on a single row
+		ex. each person only has one social security number, and that SSN only belongs to that one person
+	1:n two tables where a unique identifier in one table can be used multiple times in another
+		ex. one student can take many tests, or one person can have multiple bank accounts
+	0:1 a table can refer to the data of another but does not current have the information
+		ex. a person can be a doctor but not be a surgeon
+	n:n two tables where many rows of one table can have multiple matching rows in another
+		ex. a student can have multiple teachers and a teacher can have multiple students
+
+ACID Properties - the essential qualities that any RDBMS must have in order to function efficicently
+A- atomicity, an all or nothing approach, or, rather, either both of these occur or neither of them do
+	ex. transaction
+		first part: deducted funds from Person A's account
+		second part: increased funds in Person B's account
+C - consistency ensures that the DB is properly updated with new information when a transaction is completed
+I - isolation ensures that no transactions can overlap or otherwise impact any other transaction
+	ex two people are working on the same data base neither person are able to overlap or interfere with each other and must wait until the other is done
+D - durability, a committed transaction will persist in the database indefinitely
+	ex a system failure will not undo any completed transactions such as a power surge blowing the fuse will not ruin data already committed to the server
+
+Views - a virtual table that is saved and can be accessed 
+	Create view view_name As (Select ...)
+	Drop View view_name;
+Update:
+some criteria to keeep in mind when updating a View
+	1. Select statement used to create the view should not contain Group Bys
+	2. There should be no Distinct constraints in the Select
+	3. A View should not be made from multiple tables (through a Join clause or otherwise)
+	4. Views should not have Not Null values
+	5. Views should not be made from nested queries
+Create or Replace View view_name
+Reasons for using a View
+	1. an additional layer of security on tables and data
+	2. giving different people different data to observe (ex. on a public website)
+	3. allows you store complex queries and save the output for ease of access and speed
+	4. allow you to hide the complexity of your query
+
+Indexing - a way to organize the information in tables to make them easier to access and read
+	- faster reads but slower writes
+more reliant on what your index is and what your priorities are
+takes a column in your table and organizes the information virtually according to the data in that column
+	ex. table full of cities and the countries that they are in. index on the country name, that way the search knows ahead of time where to look, which means faster access
+Create Index index_name On table_name (column1, column2, ....)
+Drop Index index_name
+When to use an Index:
+	A column has a lot of variety (high cardinality) in the data sorted there
+	A table has a large number of records
+	When you use Joins to combine columns frequently
+When not to use an Index:
+	A column has little variety (low cardinality)
+	A table is very small
+
+Problems and Isolation Levels
+Problems that can occur:
+	1. Dirty Read: a query reads data that has not yet been committed. Results in inconsistent data
+	2. Non-repeatable Read: a transaction reads data once, then reads it again and gets a different value
+		Occurs when the data has been modified or deleted since the first read
+	3. Phantom Read: a transaction grabs a set of data two times, and the second time finds a newly committed piece of data
+Isolation Levels:
+	4 Main Levels
+	1. Read uncommitted: allows for Dirty Reads and Phantom Reads. The most insecure level
+	2. Read Committed: may only read data from committed transactions. Avoids Dirty Reads
+	3. Repeatable Reads: avoids Non-repeatable Reads by keeping data consistent
+	4. Serializable: the most secure level. Avoids Phantom Reads by forcing transactions to be sequential
+
+Normalization - a way to describe the redundancy or integrity of data in your database
+- the goal of normalization is to reduce redundancy and maximize integrity
+Different Levels of Normalization: (Only expect to know the first 3 Normal Forms)
+	First Normal Form (1NF) - each row must have a unique record and no single field in a record can have more than 1 value
+		- every column cannot be the same in any two records
+	Second Normal Form (2NF) - table must already be in 1NF, any non-key column must be dependent on the key column
+	Third Normal Form (3NF) - table must already be in 2NF, no transitive dependencies
+		Transitive dependency - if A goes to B and B goes to C then in order for A to go to C it has to go through B first
+			ex. Three tables for employees at a company
+				1. Employee personal records: SSN, DoB, etc
+				2. Accrued Paid Time off
+				3. Hours worked in total
+	Boyce-Codd Normal Form (BCNF) - table is in 3NF and  the primary key is only single-column
+	Fourth Normal Form (4NF) - table is in BCNF, cannot contain more tha none multi-varied attribute
+	Fifth Normal Form (5NF) - table is in 4NF, table cannot be broken down without loss of information
+	Sixth Normal Form (6NF) - table is in 5NF, and provides any further level of normalization not yet included
+
+CRUD Operations: Create, Read, Update, Delete
+- Standard operations that a DBMS needs
+	Update: keyword in MySQL that allows you to edit a piece of data already inserted
+	ex. Update table_name set col1 = 'value' where student_id = 4
+		- best rule of thumb is the use the Primary Key in the where clause, that way the system will not be confused about what record you are changing
+
+SQL Injection - securtiy hazard
+	- in a text box that a person can fill out, they can add a string of characters or values that will give them unauthorized access to the database
+		ex. in a website that asks for you ID:
+		 Enter: 1 Or 'FALSE'
+	- you can prevent SQL Injection by writing queries that are more specific

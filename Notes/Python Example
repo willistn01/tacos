@@ -1,0 +1,47 @@
+# Write a Python function that creates a Counter given an inputed list.
+#Print out the contents of the Counter in order from most instances to least.
+
+# from collections import Counter
+
+# def TupleNames(lst):
+#     c1 = Counter(lst)
+#         common =c1.most_common(len(lst))
+
+#     for i in range(len(common))
+#         print([i][0], ":", common[i][1])
+
+# mylist= ["Jacob", "Taylor", "Logan", "Precious", "Evie", "Ruth", "Nick", "Ryan"]
+# TupleNames(mylist)
+
+# Write a python function that reutnrs a list of named tuples given a list of tuples.
+# Your named tuples should also include an extra element at the end that incorporates a datetime object.
+
+# from collections import namedtuple
+# import datetime
+
+# def TupleNames(lst):
+#     ournames = namedtuple("Students", ["name", "age", "dob", "time"])
+#     newlst = []
+#     for i in lst:
+#         newlst.append(ournames(i[0], i[1], i[2], datetime.datetime.now().strftime("%X")))
+#     return newlst
+
+# mylist2 = [('John', 21, 2000), ('Ted', 34, 1988), ('Sarah', 12, 2010)]
+# newlist = TupleNames(mylist2)
+#     for i in newlist:
+#         print(i)
+
+# Write a Python funciton that takes in a file and returns a list of emails that are found in that file.
+# Be sure to use RegEx.
+
+import re # RegEx - Regular Expressions
+import os
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+def emails():
+    content =open('emails.txt', 'r')
+    finding = re.findall('\S+[@]\S+', content.read())
+    print(finding)
+    content.close()
+
+emails()

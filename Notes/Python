@@ -1,0 +1,338 @@
+from turtle import up
+
+from pkg_resources import to_filename
+
+
+Python - a general purpose high level programming language
+	- the most human readable
+	- low level is machine-readable
+
+Abstraction Levels:
+	Machine Code - binary, 1s and 0s, which turns values on or off using electrical inputs
+	Assembly Language/Code - invented in 1947, which translates between high and low level code
+	C Languages - higher level than machine and assembly
+		- most programmers work in this language
+		- contains limited keywords and is easy to learn
+	Python - very high level, most popular programming language in the world
+		- invented in 1991
+		- highly documented
+	Java - very high level, very similar to python in terms of strengths and weaknesses
+		- invented in 1995
+		- well documented
+- High level code is very easy to read, debug, and analyze
+
+REPL - Read, Evaluate, Print, Loop
+- will run each line of code, print the result, and then loop to the next
+- any data created will not persist when you close the application
+IDE - Integraded Development Environment
+	VS Code
+	IntelliJ
+
+Python Statements:
+	Simple Statement
+		ex. x = 5
+	Compound Statement
+		ex. if x > 4 :
+			print("Hello")
+	Loops
+	While Loop
+		- will evaluate some expression and then determine if its true or false
+		ex. while(x >5):
+			print("x is greater than 5")
+	For Loop
+		- will run for a defined number of times
+		for i in range(10):
+			print(i)
+
+Python Datatypes:
+	int - integer
+	string - characters
+	float - decimals
+	boolean - true/false
+	complex - imaginary numbers
+To see the datatype of any entity you can use :type()
+You can also change the type of data that something is:
+	use the datatype name as a function (conceptually)
+	ex. make 7 into a float type
+		var = 7
+		float(var)
+		print(float(var))
+Python Operators:
+	Math Operators: Addition (+), Subtraction (-), multiplication (*), division (/), modulo (%), exponent (**)
+	Assignment Operators: Equals (=), plus equals(+=), minus (-=), multiply equals (*=), divide equals (/=) exponent equals (**=), modulo equals (%=)
+
+If Statement - will execute if a condition is true
+	ex. if var == 10:
+		print(var)
+- you can expand and IF statement by using elif (else-if)
+	Use to check for multiple conditions at a time
+	ex. if x< 5:
+		print(" X is less than 5")
+		elif x < 10:
+		print ('X is less than 10, but greater than 5")
+		else:
+		print("X is greater than 10")
+
+Comparison Operators:
+- == checks if equal
+- > greater than
+- < less than
+- != check if not equal
+- >= greater than or equal to
+- <= less than or equal to
+
+Logical Operators - determines the truth of a statement
+- And - return true if both statements are true
+	ex. if x > 5 and x < 10:
+		print("x is between 5 and 10")
+- Or - return true if either statement is true
+	ex. if right_eye == closed Or left_eye == closed
+		print('depth perception is lost")
+- Not - returns the opposite
+	ex. if Not sleep_status
+		print("person is awake")
+
+Identity Operators:
+- Is - returns true if both variables are the same object
+	ex var1 = Animal('cat')
+		var2 = Animal('cat')
+- Is Not - returns false if both variables are not the same object
+
+Membership Operators
+- In
+	ex var = 'cat'
+		if var In listofAnimals:
+		print('cat is in the list of animals")
+- Not In
+
+Bitwise Operators
+- 1s and 0s
+similar to logical operators
+& - and
+| - or
+^ - xor (exclusive or)
+>> - right shift
+<< - left shift
+
+To execute a .py file in terminal you run the command: py file_name.py
+
+Collections - are useful when you want a group of data to be equal to each other
+	List - Ordered set of values, mutable (it can be changed), they do not need to be the same datatypes, allows duplicate values
+		ex. newList = [3, 4.5, "Taylor"]
+	You can access data from a "newList" by inputting []
+		ex. newList[0] = 3
+			newList[1] = 4.5
+			newList[2] = "Taylor"
+	You can use negatives to find values at a specified distance from the end
+		ex. newList [-1] = "Taylor"
+	You can add new items to a list using "append"
+		ex. newList.append(5)
+			print(newList) = [3, 4.5, "Taylor", 5]
+		ex. newList = []
+			print(newList) = []
+			for i in range(10)
+			newList.append(i)
+			print(newList) = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+	len() - return the size of the list
+	create a list of other lists
+		newList = [(1,2,3), (4,5,6), (7,8,9)]
+	List Slicing - when you grab the elements of a list after/before certain indexes
+		ex. newList[0:2] grabs the first 2 elements
+	the second index is exclusive
+	newList[::] - second colon denotes there is an increment
+	ex. newList[::2] will print numbers by 2s
+
+Dictionary - a list of elements that are mutable
+- are not ordered like an index (except in certain versions of python)
+- a list of key/value pairs
+	ex. MyDictionary = {"Brand" : "Ford", "Model" : "Focus", "Year" : "2017"}
+Keys cannot be repeated in the same dicitonary
+If a key were to be written twice then the first key will be overwritten
+
+Tuple - sorting multiple items in a single entity (a single piece of information)
+	declared using ()
+	are ordered, but they are immutable (unchangeable)
+	ex. new_tuple = ('value1', 'value2', 'value3')
+
+Set - a collection that is unordered, and immutable
+	cannot contain duplicates
+		ex. newSet = {'apple', 'cherry', 'banana', 'banana', 'melon'}
+		can use Union, Intersect, and Except to alter sets
+
+Interpreter vs Compiler
+The Interpreter will convery code into something more comprehensible for the machine and execute code line by line
+The Compiler will convert code into a file and parse the file for errors before converting it into machine code
+- Compiler is slower to execute and also takes up more memory, but it is more efficient
+- The compiler doesn't know the difference between keywords and given identifiers
+-Therefore, you cannot name an entity the same name as a keyword
+Python is considered to be an 'interpreted' language
+- The compiler does very little work in comparison to the interpreter
+
+Functions - a block of code that performs a specific unit of work
+- A funciton runs when it is called
+- A function is useful if you have code that you would like to re-use
+
+def powers_of_two(e):
+    return 2 ** e
+
+result = powers_of_2(6)
+
+You can pass multiple parameters for a function
+    ex def mult(x,y):
+        return x * y
+        print(mult(4,8))
+
+You can also create a function that does nothing to act as a place holder
+    ex. def do_nothing
+        pass
+
+# Set default parameters
+
+"""
+    Higher Order Functions
+        A function is considered a higher order if it takes a function as an argument or returns a function for output
+"""
+    ex. def powers_of_two(e):
+        return 2 ** e
+        print("The result of this math is", mult(5, powers_of_2(7)))
+        or print("The result of this math is " +str(mult(5, powers_of_2(7))))
+        both will print out The result of this math is 640
+
+# Given an employee's salary and pay period, find out how much they make per pay period
+"""
+def num_periods(period):
+    return 52 / period
+def salary_per_period(salary, period):
+    return salary / num_periods(period)
+print("Paid", salary_per_period(50000, 2), "every pay period.")
+to allow a user to interact with this:
+    user_var1 = int(input("Enter salary: "))
+    user_var2 = int(input("Enter pay period in weeks: "))
+    print("Paid", salary_per_period(user_var1, user_var2), "every pay period")
+"""
+"""
+Lambda - a small annonymous function, that can take any number of arguments but can only have one expression
+"""
+"""
+cube = lambda n : n ** 3
+def expo(y):
+	return lambda n: n ** y
+
+myNumber = expo(5)
+print(myNumber(2))
+"""
+"""
+Namespace - a collection of all variables and functions that are currently defined in a block of code
+- contain info about the object names, parameters, etc.
+- If the scioe if an ibject ends, it means its namespace ends as well
+"""
+def myfunction():
+	global var
+	var = 5 + 7
+	var = var / 2
+	if var > 10:
+		var3 = var - 10
+	else
+		pass
+	var2 = 5 + 4
+	var2 = var3 + var
+	return var2		
+def myfunctions2():
+	var2 = var + 5
+for i in range(10):
+	vari = i + var2
+"""
+Python has some built-in namespacesm which you can see by calling dir(__builtins__)
+
+Object-Oriented Programming:
+	A programming paradigm that revolves around classes and objects
+	Encompasses a certain structure of programming
+		Python is considered to be an object-oriented language, but it can also perform functional
+		therefore, Python is a mult-paradigmed program
+	
+Classes: a structure of blueprint for creating new objects
+Objects: an instance of a class, it may contain variations or adaptations of the class it is created from
+
+Four Pillars of OOPs:
+	Inheritance - a child class will inherit the attributes and methods from a parent class
+	Polymorphism - a child class(es) and the parent class can contain the same functions that do different things
+		ex. animal class with a 'move()' function
+			Snake will slither
+			Dog will run
+			Penguin will waddle
+			Falcon will fly
+	Abstraction - the specific functions or attributes of a class can be abstracted away from ( or obscured) from the user
+		ex. everyone has and uses a coffee machine but not everyone knows what a coffee machine 'does' on the inside
+			you input the coffee beans and water
+			the coffee machine gives you coffee
+			everything that goes on in between is unknown to you
+		When you call a class, the attributes and functions are not necessarily known to you but if you know what the class does, then you can still use it
+		Classes have different abstraction levels:
+			1. Public - the default abstraction for a class (global)
+			2. Private - only those with proper access to the files can see what the classes are
+				ex. if a file calls a private class, that file cannot see the class's functions or variables
+			3. Abstract - has defined methods (both abstract and non-abstract) but not implementation for those methods
+				relies upon the child classes to create implementations
+				an abstract method is one that has defined parameters but not defined implementation
+			Python does not do abstraction by default, you must import abc (abstract base classes)
+			Abstract classes cannot be instantiated
+				ex. class Shapes:
+					@abstractmethod
+					def number_sides(self)
+						pass
+					class Octagon(Shapes):
+						def number_sides(self):
+							print("Number of sides is 8")
+			4. Ecapsulation
+"""
+Strings - a dataype that is a list of characters in quotes
+	ex. "My name is Taylor"
+	python is strongly typed
+
+Collection Modules:
+	These collections are not in the default namespace, but can be imported
+Counter- a subclass of dictionaries, keeps track of the number (count) of each value
+	ex. list = ['apple', 'cherry', 'cherry', 'apple', 'orange', 'lemon']
+	count_fruits = Counter(list)
+OrderedDict - another subclass of dictionary, that is ordered and it remembers the items that are ordered to it
+	just like any other ordered collection, you can search them with indexes [#]
+DefaultDictionary - another subclass of dictionary, will give a value to a key automatically if the value does not exist
+	ex. d1 = defaultdict(int)
+Chainmap - encapsulates any number of different dictionaries and contains all of their keys and values
+	will return a list of dictionaries
+Named Tuple- tuple with names given to the indexes
+"""
+Errors and Exceptions:
+	An error is a problem in the code that the complier/interpreter
+	picks up
+		ex. x = int(input("please enter a number: "))
+		This will create a ValueError if the input is not information that
+		can be converted into 'int'
+		Error normall occur:
+			Syntax errors (incorrectly written code)
+			runtime errors (errors that occur when the program tries to
+			excute a command  that cannot work)
+		Exception is an error that occurs while the program is running
+			The terminal usually tells you the type of the error
+			that occured
+
+			ValueError
+			FileNotFoundError
+			TypeError
+			DivideByZeroError
+
+		You can create your own exceptions to occur when something happens
+		that you do not want to, raise Exception
+	Exception Handling
+		try-except block
+		the code you think may create an exception to go in the try: block
+
+		try: 
+			code that could create an error
+		except:
+			code that executes when an error is found
+		else:
+			code that will execute if there are no errors
+		finally:
+			code that will run regardless of error or no errors
+"""

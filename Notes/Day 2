@@ -1,0 +1,143 @@
+Software Development Life Cycle (SDLC)
+a way to describe the different methodologies and processes that go into developing software
+requires a plan and philosophies so that work can be distributed as appropriate and work can be done efficently
+
+Big Bang Model
+there is no specific plan
+more about design and testing
+good when there are no specific requirements in what the client is asking for
+	ambiguous
+good for when you have to handle prototypes or for learning new languages
+is not good for more complex problems or long projects
+
+Waterfall Model
+where one phase transitions onto the next
+well structured and define process
+require all the specifications upfront
+very easy to implement into projects due to documentation
+	Phases
+	Requirement Gathering - all requirements are known and recorded
+	System Design - research into the specific qualifications or requirements and the means of making those come to fruition
+	implementation - all the work
+		software development
+		responsibilities are divided among groups who are given assignments
+	Integration and Testing - when the code is put into a working product that is tested for functionality
+		for when you find problems with your software and fix them up
+	Deployment - finished working product is completed and made accessable
+	Maintenance - keeping the product up to date with the requirements
+
+Advantages of this approach
+1. Verry simple to follow and understand
+2. Very easy to schedule the development cycle
+3. Works great for smaller projects
+
+Disadvantages
+1. Testing happens late, making it difficult to identify challenges early on
+2. Hard to accomodate for changes in the design
+3. Not good for complex or object-oriented projects
+
+V-Model
+The same as Waterfall except it adds a testing phase after each step
+
+Advantages
+All the same advantages as waterfall
+Provides the ability to be very proactive in design and error tracking
+
+Disadvantages
+All the same problems as Waterfall
+Management is riskier due to the imprecise process
+Requires more time for documentation purposes
+
+Agile Model
+Focused more on adaptation for approaches that rely on the customer and client interactions
+Focused on personal relationships, teamwork and collaboration efforts
+Tasks are divided among the teams of workers, and the teams must be in consistent communication
+Comes from the idea that all projects have their own challenges
+Based upon "User Story":
+	A unit of market value, based upon some's experience
+	Have to look at the software from the perspective of people in different roles, jobs, etc.
+	Allows you to create a software that is more reliable and user-friendly
+	Describes the function that is needed and explains why it is needed
+Advantages
+1. Promotes communication and teamwork
+2. Good for projects that have changing requirements
+3. Gives developers more flexibility in their work
+4. Allows for rapid testing and deployment
+5. Low on the resource requirements
+
+Disadvantages
+1. Harder to manage due to the more variable nature of implementation
+2. Requires very strict and clear communication (product could come out not to their expectations)
+3. Harder to transfer knowledge from one team to the next
+4. More risk of sustaining the project over exceptionally long periods
+
+YOLO
+No Process defined
+No requirement setup
+Process
+	procrastinate >anxiet > scream > crunch
+Disadvantages
+1. Hard to accomodate long timeframes
+2. Not documented
+3. Limited communication
+4. Generally inefficient
+
+SCRUM
+A branch off from the Agile Methodology
+Scrum focuses on creating teams taht have specific roles in the development process
+Scrum Values
+1. Transparency - know the important aspecets of process, teh process must be visible and accessibile
+2. Inspection - Frquently check the scrum artifact and progress towars the goals of the project
+3. Adaptation - scrum mechanisms that allow you to adapt to problems or changes
+
+SCRUM members:
+Prodcut Owner (Scrummie)
+	manager of the product (account for all of the requirements of the project)
+	goal is to maximize effcetiveness of all scrum teams and the product functionalities
+	Makes sure the scrum teams understand their goals
+	manage the prodcut backlog
+Development team (The Pack)
+	resonsible for developing a releasable increment of the project
+	organize and manage their work with their fellow members to maximize efficiently
+	All developers are to be treated with respect and equality
+Scrum Master (Fly Half)
+	Responsible for maintaining scrum philosophies (values) and methodologies 
+	Make sure that the teams understand the scrum process
+	Help the Product owner manage the products backlog and other artifacts
+	Manage SCRUM team events
+SCRUM Events (Scrum Downs or Lifts)
+	create a routine for the SCRUM teams to follow
+	SCRUM development is divided into time-boxes also call "Sprints"
+		Sprints are all the same length (usually 2 or 3 weeks)
+		Each Sprint has a very specific goal for the end delivery
+	Sprint Planning
+		Decide what work needs to be done in the next Sprint
+		Review their progress since the last Sprint
+		Meetings are usually around 2 hours (for carefull planning)
+	Daily SCRUM
+		a day to day progress check on work that has been completed and needs to be done
+		optimizes team cohesion and efficiency
+	Sprint Review
+		Held at the end of every Sprint
+		Ellicit feedback from teh Product Owner on the functionalities and goals of the product
+		Allows adaption of the product backlog with work that has been completed
+		Decide how to best continue their work and optimize efficiency
+	Sprint Retrospective
+		Held after a sprint review to inspect scrum team and create a new plan for the increment
+
+Sprint Artifacts
+	Representations of the work done and needed to complete that product
+Product Backlog
+	Summary of all items that are necessary to complete the deliverable product
+	Updated at the end of ever sprint
+	Ordered list of priorities
+	Collection of user stories
+Sprint Backlog
+	Set of product backlog items that are to be done during the current sprint
+	Includes a plan for how to complete all the work for each particular Sprint
+	Forecast for the functionality of the end product
+Increments
+	The summation of all of the work done in a sprint
+	Includes a releasable product function(s)
+	Include all documentation regarding Sprint artifacts
+	Discusses the value of previous Sprints
