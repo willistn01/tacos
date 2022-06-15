@@ -1,3 +1,4 @@
+from multiprocessing import Manager
 import mysql.connector
 import names
 import maskpass
@@ -8,15 +9,22 @@ import random
 # db= mysql.connector.connect(user= "root", host= "localhost", port= 3306, passwd= passwd1, database= "Training")
 
 # cursorObject = db.cursor()
-# # cursorObject.execute("CREATE TABLE Clients (Account_Number  int Primary Key AUTO_INCREMENT NOT NULL, Name VARCHAR(100) NOT NULL, Age smallint UNSIGNED NOT NULL, Gender ENUM('Male', 'Female', 'Other') NOT NULL)")
-# cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s" ())
-
+# cursorObject.execute("CREATE TABLE Clients (Account_Number  int Primary Key AUTO_INCREMENT NOT NULL, Name VARCHAR(100) NOT NULL, Age smallint UNSIGNED NOT NULL, Gender ENUM('Male', 'Female', 'Other') NOT NULL)")
+    
 # for i in range(50):
+#     a = random.randrange(100)
+#     print(a)
 #     print(names.get_full_name())
-a = random.randrange(50)
-for i in range(50):
-    print(a)
+# mylist = ["Male", "Female", "Other","Male", "Female", "Other", "Male", "Female", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Other"]
+# for q in mylist:
+#     print(q)
+
+# cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",("Thomas", 28, "Male"))
+
+# db.commit()
 
 # cursorObject.execute("DESCRIBE Clients")
 # for x in cursorObject:
 #     print(x)
+
+# cursorObject.execute("CREATE TABLE Doctors(Patient_ID_Number int Primary Key AUTO_INCREMENT NOT NULL, Name Varchar(100) NOT NULL, ")

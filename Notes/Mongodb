@@ -60,10 +60,10 @@ CRUD Operations:
 C - Create
     > show dbs
     > use db_name (can also create a new database if the name doesn't exist yet)
-    > db.createCikkectuib("CollectionName")
+    > db.createCollection("CollectionName")
     > show collections
-    >db.CollectionName.InsertOne({})
-    >db.CollectionName.InsertMany({}, {}, {},....)
+    >db.CollectionName.insertOne({})
+    >db.CollectionName.insertMany({}, {}, {},....)
     The {} identify the info that goes into a document
     when inserting multiple documents, be sure to use [] because it is a list of doccuments
 R - Read
@@ -113,3 +113,58 @@ Primary Keys:
 
 pyMongo:
     Connecting your MongoDB server to a Python application
+
+Regex:
+    - Works similar to MySQL
+    - Pattern matching in the documents
+    - Create a Regular Expression for fields in the document to match
+    ex. db.CollectionName.find({field: {$regex: 'e', $option: 'o'}})
+    - Four Options
+        1. 'i' - ignore case sensitvity
+        2. 'm' - match strings with multi-line values (\n)
+        3. 'x' - ignores whitespace or any characters enclosed in comments (#)
+        4. 's' - allows the dot character '.' to match all characters including new lines.
+Examples
+db.CollectionName.find({field: {$regex: 'string', $options: 'i'}}) #contains this string
+
+Dropping Collections:
+- Delete is the keyword for documents
+- Drop is the key word for collections
+ex. db.CollectionName.drop()
+Dropping Fields:
+-Like dropping a column in MySQL
+ex. db.CollectionName.updateOne({field: value}, {&unset: field:1})
+- you cannnot unset an _id field
+
+Limits:
+- limit the number of records/documents that are returned
+ex. db.CollectionName.find().limit(# of documents returned).pretty()
+
+Sort:
+- works like ORDER BY in MySQL
+- order the records by the value of a field in either ascending or descending order
+ex. db.CollectionName.find().sort({field:(1/-1)}).pretty()
+- use 1 for ascending order
+- use -1 for descending order
+
+If a document doesn't have the field you are sorting by then they get thrown on the bottom/top of the order if descending/ascending order
+
+Aggregates:
+- Aggregates are harder to use and less practical in Mongo compared to MySQL
+    -this is because of the flexible structure of documents
+ex. db.CollectionName.find({$group:{_id: '', field:{$aggregate: "$field"}}})
+Functions:
+    $sum
+    $avg
+    $max
+    $min
+    $first #equally achieved by ascending/descending and then limit 1
+    $last
+- if a document doesn't have the field being aggregated, it will not be acoounted for in the aggregation
+
+Index:
+- Makes searching for records faster and easier
+- Put an index on a column/field in order to create binary tree diagrams to more easily get queries
+- takes up more space, slower writing
+ex. db.CollectionName.createIndex({field:1}, {name: "Name of Index"})
+- use indexing on larger collections with documents that have a lot of similar data
