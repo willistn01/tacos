@@ -3,28 +3,28 @@ import mysql.connector
 import names
 import maskpass
 import random
+from faker import Faker
 
-# passwd1 = maskpass.askpass(prompt="What is your MySQL password: ", mask="*")
+passwd1 = maskpass.askpass(prompt="What is your MySQL password: ", mask="*")
 
-# db= mysql.connector.connect(user= "root", host= "localhost", port= 3306, passwd= passwd1, database= "Training")
+db= mysql.connector.connect(user= "root", host= "localhost", port= 3306, passwd= passwd1, database= "Training")
 
-# cursorObject = db.cursor()
-# cursorObject.execute("CREATE TABLE Clients (Account_Number  int Primary Key AUTO_INCREMENT NOT NULL, Name VARCHAR(100) NOT NULL, Age smallint UNSIGNED NOT NULL, Gender ENUM('Male', 'Female', 'Other') NOT NULL)")
-    
-# for i in range(50):
-#     a = random.randrange(100)
-#     print(a)
-#     print(names.get_full_name())
-# mylist = ["Male", "Female", "Other","Male", "Female", "Other", "Male", "Female", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Other", "Male", "Female", "Male", "Female", "Other", "Male", "Female", "Other"]
-# for q in mylist:
-#     print(q)
+cursorObject = db.cursor()
+cursorObject.execute("CREATE TABLE if not exists Clients (Account_Number  int AUTO_INCREMENT, Primary Key(Account_Number), Name VARCHAR(100) NOT NULL, Age smallint UNSIGNED NOT NULL, Gender ENUM('Male', 'Female', 'Other') NOT NULL)")
+cursorObject.execute("CREATE TABLE if not exists Doctors (Name Varchar(100) Not Null, Client_Account int Default 1 Not Null, Foreign Key(Client_Account) References Clients(Account_Number), Type varchar(15) Not Null, Office_Address varchar(10000) Not Null)")   
 
-# cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",("Thomas", 28, "Male"))
-
+doclist=["Physician", "Specialist"]
+fake=Faker()
+mylist = ["Male", "Female", "Other"]
+i=1
+while i<51:
+    cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(82)+18, mylist[random.randrange(3)]))
+    cursorObject.execute("INSERT INTO Doctors (Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(), random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))    
+    i+=1
+db.commit()
+# cursorObject.execute("INSERT INTO Doctors(Name, Type, Office Address) Values(%s,%s,%s,%s)", ("Daniel", "Physician", "Location"))
 # db.commit()
 
 # cursorObject.execute("DESCRIBE Clients")
 # for x in cursorObject:
 #     print(x)
-
-# cursorObject.execute("CREATE TABLE Doctors(Patient_ID_Number int Primary Key AUTO_INCREMENT NOT NULL, Name Varchar(100) NOT NULL, ")

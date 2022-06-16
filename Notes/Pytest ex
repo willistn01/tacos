@@ -1,0 +1,16 @@
+import unittest
+from Python_Notes import powers_of_2
+# import employee_example
+# import employee
+import Python_Notes
+
+# class MyTest(unittest.TestCase):
+#     def testmthod(self):
+#         m1 = employee.Manager("Bob", 50000, "sales")
+#         m1.assertEqual("Manager Bob 50000 sales")
+
+class MyTest2(unititest.TestCase):
+    def testpowers(self):
+        self.assertEqual(powers_of_2(4), 16)
+if __name__=='__main__':
+    unittest.main()  

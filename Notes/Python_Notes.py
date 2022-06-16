@@ -25,6 +25,11 @@ IDE - Integrated Development Environment
     VS Code
     IntelliJ
 """
+from socket import J1939_MAX_UNICAST_ADDR
+
+from mysqlx import ProgrammingError
+
+
 def x_value(x):
     if x < 5:
             print("X is less than 5")
@@ -477,3 +482,87 @@ Errors and Exceptions:
 MySQL Connector Python:
 https://dev.mysql.com/downloads/connector/python/
 """
+""""
+Unit Testing:
+- framework that is built off of Java JUnit
+- testing each individual unit of a Program
+    - and individual function
+    - a class
+Validates each smallest portion of your program in order to ensure 
+that they can all work as a whole
+python Unit testing supports automation, set up and shutdown codes, and 
+aggreation of test results
+
+import unittest
+- Test case:
+    individual unit of testing
+    setting a value for the test input and ensuring it gives the correct output
+- Test Suite:
+    multiple test cases done at once.
+- Test Fixture:
+    refers to any other resources needed for a test
+        - extra servers for storage, a database connection, etc.
+- Test Runner:
+    Actual executor for the tests, provides the outcome to the user
+- a function can only be tested if it have a return value
+def printing(input):
+    print(input) #by itself, this cannot be tested
+    return str(input)+ "newstring" # adding this allows it to be tested
+example:
+class MyTest(unittest.TestCase):
+    def my_test(self):
+        self.assertEqual()
+        self.assertNotEqual()
+        self.assertTrue()
+        self,assertFalse()
+        self.assertIs()
+        self.assertIsNot()
+        self.assertIsInstance()
+
+Colleciton Comprehension:
+- a short and concise way to create a new collection from one that 
+already exists
+ex. you want to take in a list of numbers, and create a lite that has
+the even numbers among them
+
+-List Comprehension:
+    example
+    # list1 = [1,2,3,4,5,6,7,8,9]
+    # list2= []
+    # # list2 = [el for el in list1 if el % 2==0]
+    # list2 = [el for el in list1 if el <4]
+    # print(list2)
+- Dictionary Comprehension
+    dict2 = {key:value for (key, value) in dict2 if (key, value satisfies this)}    
+    example
+    # list1 = [1,2,3,4,5,6,7,8,9]
+    # dict1 = {}
+    # dict1 = {el:el **2 for el in list1}
+    print(dict1)
+- Set Comprehension - Identical to lists except it can't have duplicates
+and it uses {} instead of []
+- Generator Comprehension - This is also similar to lists, except it uses
+() instead of []
+    it saves memory by not saving the collection as a whole, instead it
+    saves each individual value in memory
+    more memory efficient
+
+PyPI
+- Python Package Index
+- python's dedicated repository for importing modules and packages
+- allows developers to create their own modules and then deliver them 
+remotely so that other developers can easily access them
+- delevelops can import the previously created libraries for their own
+purposes
+- Packages are just collections of modules
+
+pip
+-  the python package installer
+- can install packages from PYPI and elsewhere
+- pip commands
+    pip search - searches for all PyPI packages
+    pip install - install packages
+    pip uninstall- uninstalls a previously installed package
+    pip list- creates a list of all currently installed packages
+"""
+

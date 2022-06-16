@@ -1,6 +1,3 @@
-from lib2to3.pytree import Base
-
-from psutil import users
 import employee                                    # must import the file that contains the classes
 import os
 import re
