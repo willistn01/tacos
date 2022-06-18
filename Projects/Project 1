@@ -3,6 +3,7 @@ import names
 import maskpass
 import random
 from faker import Faker
+from datetime import datetime
 
 passwd1 = maskpass.askpass(prompt="What is your MySQL password: ", mask="*")
 
@@ -13,18 +14,33 @@ cursorObject = db.cursor()
 # cursorObject.execute("CREATE TABLE if not exists Doctors (Doctor_Name Varchar(100), Primary Key(Doctor_Name), Client_Account int, Foreign Key(Client_Account) References Clients(Account_Number), Type varchar(15) Not Null, Office_Address varchar(10000) Not Null)")   
 # cursorObject.execute("Create Table if not exists Cost_of_Coverage (Account_Num int, Foreign Key(Account_Num) References Clients(Account_Number), Doc_Name varchar(100), Foreign Key(Doc_Name) References Doctors(Doctor_Name), Deductable int Not Null, Monthly_Charge int Not Null)")
 
-doclist=["Physician", "Specialist"]
-fake=Faker()
-mylist = ["Male", "Female", "Other"]
-i=1
-while i<51:
+# doclist=["Physician", "Specialist"]
+# fake=Faker()
+# mylist = ["Male", "Female", "Other"]
+# i=1
+# while i<51:
     # cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(82)+18, mylist[random.randrange(3)]))
     # cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))    
-    cursorObject.execute("INSERT INTO Cost_of_Coverage (Account_Num, Doc_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)", (random.randrange(50)+1, names.get_full_name(), random.randrange(100,500), random.randrange(50,200)))
-    i+=1
-db.commit()
+    # cursorObject.execute("INSERT INTO Cost_of_Coverage (Account_Num, Doc_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)", (random.randrange(50)+1, names.get_full_name(), random.randrange(100,500), random.randrange(50,200)))
+    # i+=1
+# db.commit()
 # cursorObject.execute("Insert Into Doctors(Doctor_Name, Client_Account, Type, Office_Address) Values(%s,%s,%s,%s)", ("Thomas", 2, "Physician", "Place"))
 # db.commit()
 # cursorObject.execute("Select * From Client and Doctors")
 # for x in cursorObject:
 #     print(x)
+# cursorObject.execute("Show Tables")
+# for x in cursorObject:
+#     print(x)
+X1 = "Insert Into Clients(Name,Age,Gender) Values(%s,%s,%s)" 
+Sp1 = [("Thomas", 21, "Male")]
+X2= "Insert Into Doctors(Doctor_Name, Client_Account, Type, Office_Address) Values(%s,%s,%s,%s)"
+Sp2= [("Monica", 1, "Physician", "Something Something Alabaster")]
+X3= "Insert Into Cost_of_Coverage(Account_Num, Doc_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)"
+Sp3=[( ' ', ' ', 500, 150)]
+
+for x, Sp2 in enumerate(Sp2):
+    cursorObject.execute(X2, Sp2)
+    last_Account=cursorObject.lastrowid
+    cursorObject.execute(X3, (last_Account,) + Sp3[x])
+db.commit()
