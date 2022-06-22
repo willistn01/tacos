@@ -1,3 +1,4 @@
+from msilib.schema import Error
 import mysql.connector
 import names
 import maskpass
@@ -12,17 +13,18 @@ db= mysql.connector.connect(user= "root", host= "localhost", port= 3306, passwd=
 cursorObject = db.cursor()
 # cursorObject.execute("CREATE TABLE if not exists Clients (Account_Number  int AUTO_INCREMENT, Primary Key(Account_Number), Name VARCHAR(100) NOT NULL, Age smallint UNSIGNED NOT NULL, Gender ENUM('Male', 'Female', 'Other') NOT NULL)")
 # cursorObject.execute("CREATE TABLE if not exists Doctors (Doctor_Name Varchar(100), Primary Key(Doctor_Name), Client_Account int, Foreign Key(Client_Account) References Clients(Account_Number), Type varchar(15) Not Null, Office_Address varchar(10000) Not Null)")   
-# cursorObject.execute("Create Table if not exists Cost_of_Coverage (Account_Num int, Foreign Key(Account_Num) References Clients(Account_Number), Doc_Name varchar(100), Foreign Key(Doc_Name) References Doctors(Doctor_Name), Deductable int Not Null, Monthly_Charge int Not Null)")
+# cursorObject.execute("Create Table if not exists Cost_of_Coverage (Account_Num int, Foreign Key(Account_Num) References Clients(Account_Number), Doc_Name varchar(100), Foreign Key(Doc_Name) References Doctors(Doctor_Name), Deductable int Default 200, Monthly_Charge int Default 100)")
+# db.commit()
 
 # doclist=["Physician", "Specialist"]
 # fake=Faker()
 # mylist = ["Male", "Female", "Other"]
 # i=1
-# while i<51:
+# while i<50:
     # cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(82)+18, mylist[random.randrange(3)]))
     # cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))    
-    # cursorObject.execute("INSERT INTO Cost_of_Coverage (Account_Num, Doc_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)", (random.randrange(50)+1, names.get_full_name(), random.randrange(100,500), random.randrange(50,200)))
-    # i+=1
+#     cursorObject.execute("Update Column(Deductable)", (random.randrange(100,500)))
+#     i+=1
 # db.commit()
 # cursorObject.execute("Insert Into Doctors(Doctor_Name, Client_Account, Type, Office_Address) Values(%s,%s,%s,%s)", ("Thomas", 2, "Physician", "Place"))
 # db.commit()
@@ -32,15 +34,103 @@ cursorObject = db.cursor()
 # cursorObject.execute("Show Tables")
 # for x in cursorObject:
 #     print(x)
-X1 = "Insert Into Clients(Name,Age,Gender) Values(%s,%s,%s)" 
-Sp1 = [("Thomas", 21, "Male")]
-X2= "Insert Into Doctors(Doctor_Name, Client_Account, Type, Office_Address) Values(%s,%s,%s,%s)"
-Sp2= [("Monica", 1, "Physician", "Something Something Alabaster")]
-X3= "Insert Into Cost_of_Coverage(Account_Num, Doc_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)"
-Sp3=[( ' ', ' ', 500, 150)]
+# X1 = "Insert Into Clients(Name,Age,Gender) Values(%s,%s,%s)" 
 
-for x, Sp2 in enumerate(Sp2):
-    cursorObject.execute(X2, Sp2)
-    last_Account=cursorObject.lastrowid
-    cursorObject.execute(X3, (last_Account,) + Sp3[x])
-db.commit()
+# X2= "Insert Into Doctors(Doctor_Name, Client_Account, Type, Office_Address) Values(%s,%s,%s,%s)"
+# Sp2= [("Alfred Perry", 11, "Male", fake.address())]
+
+# X3= "Insert Into Cost_of_Coverage(Account_Num, Doc_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)"
+# Sp3=[( 'Monica', 1, 500, 150)]
+
+
+# cursorObject.execute("Insert Into Doctors(Doctor_Name, Client_Account, Type, Office_Address) Values(%s,%s,%s,%s)",("Alfred Knox", 11, "Male", fake.address()))
+# db.commit()
+# cursorObject.execute("Insert into Cost_of_Coverage(Account_Num, Doc_Name, Deductable, Monthly_Charge) Values(")
+# cursorObject.execute("Insert into Cost_of_Coverage((Account_Num) Select(Account_Number) from Clients)") 
+# Insert into cost_of_coverage(Doc_Name) Select(Doctor_Name) from Doctors)") 
+# ("",random.randrange(100,500), random.randrange(50,200)))
+# db.commit()
+def insert_creation():
+    while True:
+        print("Are you creating a client entry, a doctor entry, or a cost of coverage entry?")
+        print("\t1. Client.")
+        print("\t2. Doctor.")
+        print("\t3. Cost of coverage.")
+        print("\t4. Return back to directory.")
+        try:
+            cel=int(input("\nSelection: "))
+        except ValueError:
+                print(ValueError)
+                print("Please enter an integer that is between 1 and 4.")
+        if cel == 1:
+            mylist = ["Male", "Female", "Other"]
+            cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(82)+18, mylist[random.randrange(3)]))
+            db.commit()
+        elif cel==2:
+            fake=Faker()
+            doclist=["Physician", "Specialist"]
+            cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))
+            db.commit()
+        elif cel==3:
+            account= input("Give me number between 1-50: ")
+            name= input("Give me a first and last name: ")
+            deductable= input("Choose a number between 100-1000: ")
+            charge= input("Give me a number between 100-400: ")
+            cursorObject.execute("Insert Into Cost_of_Coverage (Account_Number, Doctor_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)",(account,name,deductable,charge))
+            db.commit()
+        elif cel==4:
+            break
+        else:
+            print("Please insert valid integer.")
+
+def insert_reading():
+    while True:
+        print("Welcome to the reading portion. Make a selection.")
+        print("\t1. To view tables.")
+        print("\t2. To view columns.")
+        print("\t3. To view a row.")
+        print("\t4. To return to directory.")
+        while True:
+            rel=int(input("\nSelection: "))
+            if rel==1:
+                cursorObject.execute("Select * From Client and Doctors")
+                for x in cursorObject:
+                    print(x)
+        cursorObject.execute("Show Tables")
+        for x in cursorObject:
+            print(x)
+def startup():
+    while True:
+        print("Hello, and welcome to this insurance tutorial. Today we will be focusing on some basic functions to help you become an effective member of our team. Please select an option for us to get started.")
+        print("\t1. Add information to a table.")
+        print("\t2. Read a specific table.")
+        print("\t3. Update the information of a table.")
+        print("\t4. Delete a row, column, table or the database.")
+        print("\t5. Or, exit now and try again later.")
+        while True:
+            try:
+                sel= int(input("\nSelection: "))
+            except ValueError:
+                print("Value Error")
+                print("Please enter an integer that is between 1 and 5.")
+            else:
+                break
+        if sel == 1:
+            insert_creation()
+        elif sel == 2:
+            insert_reading()
+        elif sel == 3:
+            insert_updating()
+        elif sel == 4:
+            insert_deletion()
+        elif sel == 5:
+            disfile = open('newFile.txt', 'w')
+            disfile.write(' ')
+            disfile.close()
+            print("Alright, catch ya later then.")
+            break
+        else:
+            print("Please enter a valid input.")
+
+startup()
+        

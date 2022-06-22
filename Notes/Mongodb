@@ -113,7 +113,7 @@ Primary Keys:
 
 pyMongo:
     Connecting your MongoDB server to a Python application
-
+    ex. from pymongo import mongo_client
 Regex:
     - Works similar to MySQL
     - Pattern matching in the documents
@@ -168,3 +168,16 @@ Index:
 - takes up more space, slower writing
 ex. db.CollectionName.createIndex({field:1}, {name: "Name of Index"})
 - use indexing on larger collections with documents that have a lot of similar data
+
+BASE:
+Basically Available = anyone can obtain the data if they request it
+Soft state - describes the interval where changes are to be made to the data
+Eventually consistent - after all necessary steps have been made the data becomes consistent
+
+Alternative approach to data systems design from ACID
+ACID values the consistency and integrity of data, BASE prioritizes availability
+Mongo uses sharding and replication to obtain High Availability
+- Sharding is splitting the data into shards and distributing it across servers
+-
+- Any client on the server who requests the data will receive it
+The idea is that the data can be resolved or fixed at a later time due to Mongo's flexibility

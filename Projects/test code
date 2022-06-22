@@ -24,6 +24,7 @@ from faker import Faker
 # for q in mylist:
 #     print(q)
 # mylist = ["Male", "Female", "Other"]
+doclist=["Physician", "Specialist"]
 # i=1
 # while i<51:
 #     cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(100), mylist[random.randrange(2)])
