@@ -95,7 +95,7 @@ def insert_reading():
         if rel==1:
             while True:
                 print("Here you can choose which table to view.")
-                print("\t1. To view all tables present.")
+                print("\t1. To view what tables present.")
                 print("\t2. To view Clients.")
                 print("\t3. To view Doctors.")
                 print("\t4. To view the Cost of Coverage.")
