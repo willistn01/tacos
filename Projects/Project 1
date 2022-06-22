@@ -56,7 +56,7 @@ def insert_creation():
         print("\t1. Client.")
         print("\t2. Doctor.")
         print("\t3. Cost of coverage.")
-        print("\t4. Return back to directory.")
+        print("\t4. Return back to the main directory.")
         try:
             cel=int(input("\nSelection: "))
         except ValueError:
@@ -80,30 +80,126 @@ def insert_creation():
             db.commit()
         elif cel==4:
             break
-        else:
-            print("Please insert valid integer.")
 
 def insert_reading():
     while True:
         print("Welcome to the reading portion. Make a selection.")
-        print("\t1. To view tables.")
-        print("\t2. To view columns.")
-        print("\t3. To view a row.")
-        print("\t4. To return to directory.")
-        while True:
+        print("\t1. To view the tables.")
+        print("\t2. To view the tables' columns.")
+        print("\t3. To return to the main directory.")
+        try:
             rel=int(input("\nSelection: "))
-            if rel==1:
-                cursorObject.execute("Select * From Client and Doctors")
-                for x in cursorObject:
-                    print(x)
-        cursorObject.execute("Show Tables")
-        for x in cursorObject:
-            print(x)
+        except ValueError:
+            print(ValueError)
+            print("Please make a valid input.")
+        if rel==1:
+            while True:
+                print("Here you can choose which table to view.")
+                print("\t1. To view all tables present.")
+                print("\t2. To view Clients.")
+                print("\t3. To view Doctors.")
+                print("\t4. To view the Cost of Coverage.")
+                print("\t5. To return to the previous directory.")
+                try:
+                    tel=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Please make a valid selection.")
+                if tel==1:
+                    cursorObject.execute("Show Tables")
+                    for x in cursorObject:
+                        print(x)
+                elif tel==2:
+                    cursorObject.execute("Select * From Clients")
+                    for x in cursorObject:
+                        print(x)
+                elif tel==3:
+                    cursorObject.execute("Select * From Doctors")
+                    for x in cursorObject:
+                        print(x)
+                elif tel==4:
+                    cursorObject.execute("Select * From Cost_of_Coverage")
+                    for x in cursorObject:
+                        print(x)
+                elif tel==5:
+                    break
+        elif rel==2:
+            while True:
+                print("Enter your selection of the column you want to view.")
+                print("Here is a list of all available columns.")
+                print("Clients: \t1.Account_Number, \t2.Name, \t3.Age, \t4.Gender")
+                print("Doctors: \t5.Doctor_Name, \t6.Client_Account, \t7.Type, \t8.Office_Address")
+                print("Cost_of_Coverage: \t9.Account_Number, \t10.Doctor_Name, \t11.Deductable, \t12.Monthly_Charge")
+                print("\t13 When done viewing.")
+                try:
+                    mel=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Please try again.")
+                if mel==1:
+                    cursorObject.execute("Select Account_Number from Clients")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==2:
+                    cursorObject.execute("Select Name from Clients")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==3:
+                    cursorObject.execute("Select Age from Clients")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==4:
+                    cursorObject.execute("Select Gender from Clients")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==5:
+                    cursorObject.execute("Select Doctor_Name from Doctors")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==6:
+                    cursorObject.execute("Select Client_Account from Doctors")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==7:
+                    cursorObject.execute("Select Type from Doctors")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==8:
+                    cursorObject.execute("Select Office_Address from Doctors")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==9:
+                    cursorObject.execute("Select Account_Number from Cost_of_Coverage")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==10:
+                    cursorObject.execute("Select Doctor_Name from Cost_of_Coverage")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==11:
+                    cursorObject.execute("Select Deductable from Cost_of_Coverage")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==12:
+                    cursorObject.execute("Select Monthly_Charge from Cost_of_Coverage")
+                    for x in cursorObject:
+                        print(x)
+                elif mel==13:
+                    break
+        elif rel==3:
+            break
+
+def insert_updating():
+    pass
+
+def insert_deletion():
+    pass
+
 def startup():
     while True:
         print("Hello, and welcome to this insurance tutorial. Today we will be focusing on some basic functions to help you become an effective member of our team. Please select an option for us to get started.")
         print("\t1. Add information to a table.")
-        print("\t2. Read a specific table.")
+        print("\t2. Read a specific table or column.")
         print("\t3. Update the information of a table.")
         print("\t4. Delete a row, column, table or the database.")
         print("\t5. Or, exit now and try again later.")
