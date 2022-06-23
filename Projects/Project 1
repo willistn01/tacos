@@ -20,7 +20,7 @@ cursorObject = db.cursor()
 # fake=Faker()
 # mylist = ["Male", "Female", "Other"]
 # i=1
-# while i<50:
+# while i<51:
     # cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(82)+18, mylist[random.randrange(3)]))
     # cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))    
 #     cursorObject.execute("Update Column(Deductable)", (random.randrange(100,500)))
@@ -63,21 +63,95 @@ def insert_creation():
                 print(ValueError)
                 print("Please enter an integer that is between 1 and 4.")
         if cel == 1:
-            mylist = ["Male", "Female", "Other"]
-            cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(82)+18, mylist[random.randrange(3)]))
-            db.commit()
+            while True:
+                print("First we need to create the table Clients, then we'll fill the table.")
+                print("\t1. Create Clients.")
+                print("\t2. Fill table.")
+                print("\t3. Single Entry.")
+                print("\t4. Return to previous directory.")
+                try:
+                    cl1=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Please enter the correct number.")
+                if cl1==1:
+                    cursorObject.execute("CREATE TABLE if not exists Clients (Account_Number  int AUTO_INCREMENT, Primary Key(Account_Number), Name VARCHAR(100) NOT NULL, Age smallint UNSIGNED NOT NULL, Gender ENUM('Male', 'Female', 'Other') NOT NULL)")
+                    db.commit()
+                elif cl1==2:
+                    mylist = ["Male", "Female", "Other"]
+                    i=1
+                    while i<51:
+                        cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(82)+18, mylist[random.randrange(3)]))
+                        i+=1
+                    db.commit()
+                elif cl1==3:    
+                    mylist = ["Male", "Female", "Other"]
+                    cursorObject.execute("INSERT INTO Clients (Name, Age, Gender) VALUES(%s,%s,%s) ",(names.get_full_name(), random.randrange(82)+18, mylist[random.randrange(3)]))
+                    db.commit()
+                elif cl1==4:
+                    break
         elif cel==2:
-            fake=Faker()
-            doclist=["Physician", "Specialist"]
-            cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))
-            db.commit()
+            while True:
+                print("Secondly we need to create the table Doctors, and then we'll fill the table.")
+                print("\t1. Create Doctors.")
+                print("\t2. Fill table.")
+                print("\t3. Single Entry.")
+                print("\t4. Return to previous directory.")
+                try:
+                    cl2=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Please enter the correct number.")
+                if cl2==1:
+                    cursorObject.execute("CREATE TABLE if not exists Doctors (Doctor_Name Varchar(100), Client_Account int, Foreign Key(Client_Account) References Clients(Account_Number), Type varchar(15) Not Null, Office_Address varchar(10000) Not Null)")
+                    db.commit()
+                elif cl2==2:
+                    doclist=["Physician", "Specialist"]
+                    fake=Faker()
+                    i=1
+                    while i<51:
+                        cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))      
+                    i+=1
+                    db.commit()
+                elif cl2==3:                                
+                    fake=Faker()
+                    doclist=["Physician", "Specialist"]
+                    cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))
+                    db.commit()
+                elif cl2==4:
+                    break
         elif cel==3:
-            account= input("Give me number between 1 and 50: ")
-            name= input("Give me a first and last name: ")
-            deductable= input("Choose a number between 100 and 1000: ")
-            charge= input("Give me a number between 100 and 400: ")
-            cursorObject.execute("Insert Into Cost_of_Coverage (Account_Number, Doctor_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)",(account,name,deductable,charge))
-            db.commit()
+            while True:
+                print("Finally we need to create the table Cost of Coverage, and then we'll fill the table.")
+                print("\t1. Create Cost of Coverage.")
+                print("\t2. Fill table.")
+                print("\t3. Single Entry.")
+                print("\t4. Finally Adjustment.")
+                print("\t5. Return to previous directory.")
+                try:
+                    cl3=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Please enter the correct number.")
+                if cl3==1:
+                    cursorObject.execute("create table cost_of_coverage as(Select Account_Number, Doctor_Name from Clients join Doctors on Clients.Account_Number=Doctors.Client_Account)")
+                    db.commit()
+                elif cl3==2:
+                    cursorObject.execute("alter table cost_of_coverage add column Deductible int not null Default 500")
+                    cursorObject.execute("alter table cost_of_coverage add column Monthly_Charge int not null default 300") 
+                    db.commit()
+                elif cl3==3:                  
+                    account= input("Give me number between 1 and 50: ")
+                    name= input("Give me a first and last name: ")
+                    deductable= input("Choose a number between 100 and 1000: ")
+                    charge= input("Give me a number between 100 and 400: ")
+                    cursorObject.execute("Insert Into Cost_of_Coverage (Account_Number, Doctor_Name, Deductible, Monthly_Charge) Values(%s,%s,%s,%s)",(account,name,deductable,charge))
+                    db.commit()
+                elif cl3==4:
+                    cursorObject.execute("alter table cost_of_coverage add foreign key(Account_Number) references Clients(Account_Number)")
+                    db.commit()
+                elif cl3==5:
+                    break
         elif cel==4:
             break
 
@@ -129,7 +203,7 @@ def insert_reading():
                 print("Enter your selection of the column you want to view.")
                 print("Clients: \t1.Account_Number, \t2.Name, \t3.Age, \t4.Gender")
                 print("Doctors: \t5.Doctor_Name, \t6.Client_Account, \t7.Type, \t8.Office_Address")
-                print("Cost_of_Coverage: \t9.Account_Number, \t10.Doctor_Name, \t11.Deductable, \t12.Monthly_Charge")
+                print("Cost_of_Coverage: \t9.Account_Number, \t10.Doctor_Name, \t11.Deductible, \t12.Monthly_Charge")
                 print("\t13 When done viewing.")
                 try:
                     mel=int(input("\nSelection: "))
@@ -177,7 +251,7 @@ def insert_reading():
                     for x in cursorObject:
                         print(x)
                 elif mel==11:
-                    cursorObject.execute("Select Deductable from Cost_of_Coverage")
+                    cursorObject.execute("Select Deductible from Cost_of_Coverage")
                     for x in cursorObject:
                         print(x)
                 elif mel==12:
@@ -333,11 +407,50 @@ def insert_deletion():
                 elif ael==4:
                     break
         elif rel==3:
-            cursorObject.execute("Truncate Table Cost_of_Coverage")
-            db.commit()
+            while True:
+                print("So, now you've chosen cleansing?")
+                print("\t1. To truncate Cost of Coverage.")
+                print("\t2. To truncate Doctors.")
+                print("\t3. To truncate Clients.")
+                print("\t4. To distance yourself from this.")
+                try:
+                    trl=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("It's too late now, you must commit.")
+                if trl==1:
+                    cursorObject.execute("Truncate Table Cost_of_Coverage")
+                    db.commit()
+                elif trl==2:
+                    cursorObject.execute("Truncate Table Doctors")
+                    db.commit()
+                elif trl==3:
+                    cursorObject.execute("Truncate Table Clients")
+                    db.commit()
+                elif trl==4:
+                    break
         elif rel==4:
-            cursorObject.execute("Drop Table Cost_of_Coverage")
-            db.commit()
+                print("Erase them from history.")
+                print("\t1. To delete Cost of Coverage.")
+                print("\t2. To delete Doctors.")
+                print("\t3. To delete Clients.")
+                print("\t4. Job... Done.")
+                try:
+                    erl=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("You could have walked away but the choice is no longer yours.")
+                if erl==1:
+                    cursorObject.execute("Drop Table Cost_of_Coverage")
+                    db.commit()
+                elif erl==2:
+                    cursorObject.execute("Drop Table Doctors")
+                    db.commit()
+                elif erl==3:
+                    cursorObject.execute("Drop Table Clients")
+                    db.commit()
+                elif erl==4:
+                    break
         elif rel==5:
             break
 
