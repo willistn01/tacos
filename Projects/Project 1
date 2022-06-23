@@ -106,13 +106,14 @@ def insert_creation():
                     cursorObject.execute("CREATE TABLE if not exists Doctors (Doctor_Name Varchar(100), Client_Account int, Foreign Key(Client_Account) References Clients(Account_Number), Type varchar(15) Not Null, Office_Address varchar(10000) Not Null)")
                     db.commit()
                 elif cl2==2:
-                    doclist=["Physician", "Specialist"]
-                    fake=Faker()
-                    i=1
-                    while i<51:
-                        cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))      
-                    i+=1
-                    db.commit()
+                    pass
+                    # doclist=["Physician", "Specialist"]
+                    # fake=Faker()
+                    # i=1
+                    # while i<51:
+                    #     cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))      
+                    # i+=1
+                    # db.commit()
                 elif cl2==3:                                
                     fake=Faker()
                     doclist=["Physician", "Specialist"]
