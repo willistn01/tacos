@@ -72,10 +72,10 @@ def insert_creation():
             cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))
             db.commit()
         elif cel==3:
-            account= input("Give me number between 1-50: ")
+            account= input("Give me number between 1 and 50: ")
             name= input("Give me a first and last name: ")
-            deductable= input("Choose a number between 100-1000: ")
-            charge= input("Give me a number between 100-400: ")
+            deductable= input("Choose a number between 100 and 1000: ")
+            charge= input("Give me a number between 100 and 400: ")
             cursorObject.execute("Insert Into Cost_of_Coverage (Account_Number, Doctor_Name, Deductable, Monthly_Charge) Values(%s,%s,%s,%s)",(account,name,deductable,charge))
             db.commit()
         elif cel==4:
@@ -125,8 +125,8 @@ def insert_reading():
                     break
         elif rel==2:
             while True:
-                print("Enter your selection of the column you want to view.")
                 print("Here is a list of all available columns.")
+                print("Enter your selection of the column you want to view.")
                 print("Clients: \t1.Account_Number, \t2.Name, \t3.Age, \t4.Gender")
                 print("Doctors: \t5.Doctor_Name, \t6.Client_Account, \t7.Type, \t8.Office_Address")
                 print("Cost_of_Coverage: \t9.Account_Number, \t10.Doctor_Name, \t11.Deductable, \t12.Monthly_Charge")
@@ -190,18 +190,164 @@ def insert_reading():
             break
 
 def insert_updating():
-    pass
+    while True:
+        print("Welcome to the updating portion of the tutorial. In this directory we can update tables, columns and rows.")
+        print("\t1. To update a table.")
+        print("\t2. To update a column.")
+        print("\t3. To update a row.")
+        print("\t4. To return to the main directory.")
+        try:
+            uel=int(input("\nSelection: "))
+        except ValueError:
+            print(ValueError)
+            print("Please make a valid selection.")
+        if uel==1:
+            while True:
+                print("Here in this section we can update the tables by adding columns.")
+                print("\t1. To add a column to Clients.")
+                print("\t2. To add a column to Doctors.")
+                print("\t3. To add a column to Cost of Coverage.")
+                print("\t4. To return to the previous directory.")
+                try:
+                    zel=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Please enter the correct integer.")
+                if zel==1:
+                    cursorObject.execute("Alter Table Clients add Column(Risk_Percentage int Default 0)")
+                    db.commit()
+                elif zel==2:
+                    cursorObject.execute("Alter Table Doctors add column(Rating small int default 1)")
+                    db.commit()
+                elif zel==3:
+                    cursorObject.execute("Alter Table Cost_of_Coverage add column(Duration_of_Coverage small int default 12)")
+                    db.commit()
+                elif zel==4:
+                    break
+        elif uel==2:
+            while True:
+                print("Welcome to the Column updating section.")
+                print("\t1. Update Risk Percentage in Clients.")
+                print("\t2. Update Rating in Doctors.")
+                print("\t3. Update Duration of Coverage in Cost of Coverage.")
+                print("\t4. Exit to previous directory.")
+                try:
+                    yel=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Please make a proper selection.")
+                if yel==1:
+                    cursorObject.execute("Update Clients Set Risk_Percentage='60'")
+                    db.commit()
+                elif yel==2:
+                    cursorObject.execute("Update Doctors Set Rating='4'")
+                    db.commit()
+                elif yel==3:
+                    cursorObject.execute("Update Cost_of_Coverage Set Duraiton_of_Coverage='18'")
+                    db.commit()
+                elif yel==4:
+                    break
+        elif uel==3:
+            while True:
+                print("Welcome to the row updating portion.")
+                print("\t1. Update a row in Clients.")
+                print("\t2. Update a row in Doctors")
+                print("\t3. Update a row in Cost of Coverage.")
+                print("\t4. To return to the previous directory.")
+                try:
+                    nel=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Please stop resisting.")
+                if nel==1:
+                    cursorObject.execute("Update Clients Set Risk_Percentage='35' Where Account_Number=2")
+                    db.commit()
+                elif nel==2:
+                    cursorObject.execute("Update Doctors Set Rating='2' Where Client_Account= 40")
+                    db.commit()
+                elif nel==3:
+                    cursorObject.execute("Update Cost_of_Coverage Set Duration_of_Coverage='16' Where Account_Number=3")
+                    db.commit()
+                elif nel==4:
+                    break
+        elif uel==4:
+            break
 
 def insert_deletion():
-    pass
+    while True:
+        print("And here is where we bid farewell to our soon to be fallen friends.")
+        print("\t1. To delete a row.")
+        print("\t2. To delete a column.")
+        print("\t3. To truncate a table.")
+        print("\t4. To delete a table.")
+        print("\t5. Too morbid? Exit here.")
+        try:
+            rel=int(input("\nSelection: "))
+        except ValueError:
+            print(ValueError)
+            print("R.I.P. yer brain.")
+        if rel==1:
+            while True:
+                print("So, you've selected to lay to rest a row huh?")
+                print("\t1. To remove a row from Clients.")
+                print("\t2. To remove a row from Doctors.")
+                print("\t3. To remove a row from Cost of Coverage.")
+                print("\t4. To stop deleting rows.")
+                try:
+                    pel=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Lay rest to their weary souls.")
+                if pel==1:
+                    cursorObject.execute("Delete from Clients Where Account_Number=2")
+                    db.commit()
+                elif pel==2:
+                    cursorObject.execute("Delete from Doctors Where Client_Account=33")
+                    db.commit()
+                elif pel==3:
+                    cursorObject.execute("Delete from Cost_of_Coverage Where Account_Number=2")
+                    db.commit()
+                elif pel==4:
+                    break
+        elif rel==2:
+            while True:
+                print("So, you've chosen mass murder...")
+                print("\t1. To drop a column from Clients.")
+                print("\t2. To drop a column from Doctors.")
+                print("\t3. To drop a column from Cost of Coverage.")
+                print("\t4. To stop the violence.")
+                try:
+                    ael=int(input("\nSelection: "))
+                except ValueError:
+                    print(ValueError)
+                    print("Trying to develop a moral conscience?")
+                if ael==1:
+                    cursorObject.execute("Alter Table Clients Drop Column Risk_Percentage")
+                    db.commit()
+                elif ael==2:
+                    cursorObject.execute("Alter Table Doctors Drop Column Rating")
+                    db.commit()
+                elif ael==3:
+                    cursorObject.execute("Alter Table Cost_of_Coverage Drop Column Duration_of_Coverage")
+                    db.commit()
+                elif ael==4:
+                    break
+        elif rel==3:
+            cursorObject.execute("Truncate Table Cost_of_Coverage")
+            db.commit()
+        elif rel==4:
+            cursorObject.execute("Drop Table Cost_of_Coverage")
+            db.commit()
+        elif rel==5:
+            break
 
 def startup():
     while True:
         print("Hello, and welcome to this insurance tutorial. Today we will be focusing on some basic functions to help you become an effective member of our team. Please select an option for us to get started.")
-        print("\t1. Add information to a table.")
+        print("\t1. Create information for a table.")
         print("\t2. Read a specific table or column.")
         print("\t3. Update the information of a table.")
-        print("\t4. Delete a row, column, table or the database.")
+        print("\t4. Delete a row, column, or table or even Truncate a Table.")
         print("\t5. Or, exit now and try again later.")
         while True:
             try:
