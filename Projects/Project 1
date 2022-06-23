@@ -94,9 +94,8 @@ def insert_creation():
             while True:
                 print("Secondly we need to create the table Doctors, and then we'll fill the table.")
                 print("\t1. Create Doctors.")
-                print("\t2. Fill table.")
-                print("\t3. Single Entry.")
-                print("\t4. Return to previous directory.")
+                print("\t2. Single Entry.")
+                print("\t3. Return to previous directory.")
                 try:
                     cl2=int(input("\nSelection: "))
                 except ValueError:
@@ -105,21 +104,12 @@ def insert_creation():
                 if cl2==1:
                     cursorObject.execute("CREATE TABLE if not exists Doctors (Doctor_Name Varchar(100), Client_Account int, Foreign Key(Client_Account) References Clients(Account_Number), Type varchar(15) Not Null, Office_Address varchar(10000) Not Null)")
                     db.commit()
-                elif cl2==2:
-                    pass
-                    # doclist=["Physician", "Specialist"]
-                    # fake=Faker()
-                    # i=1
-                    # while i<51:
-                    #     cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))      
-                    # i+=1
-                    # db.commit()
-                elif cl2==3:                                
+                elif cl2==2:                                
                     fake=Faker()
                     doclist=["Physician", "Specialist"]
                     cursorObject.execute("INSERT INTO Doctors (Doctor_Name, Client_Account, Type, Office_Address) VALUES(%s,%s,%s,%s) ", (names.get_full_name(),random.randrange(50)+1, doclist[random.randrange(2)], fake.address()))
                     db.commit()
-                elif cl2==4:
+                elif cl2==3:
                     break
         elif cel==3:
             while True:
